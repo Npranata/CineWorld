@@ -60,6 +60,7 @@ main{
     max-height: 50%;
     /* justify-content: flex-start; */
     overflow: hidden;
+    position: relative;
 
 }
 
@@ -102,3 +103,29 @@ main{
 .movieInfo span.red{
     color: rgb(180, 25, 25);
 }
+
+.overview{
+    position: absolute; /* Sets the positioning context of elements with the .overview class to be absolute, positioning them relative to their nearest positioned ancestor or the initial containing block if no positioned ancestor is found.*/
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.3rem;
+    font-size: small;
+    transform: translateY(105%);
+    transition: transform 0.3s ease-in;
+    overflow: auto;
+}
+.overview h4{
+    /* margin-top: 5px;
+    margin-bottom: 11px;   */
+
+}
+
+/* Apply hover styles for touch devices */
+@media (hover: hover) {
+    .movie:hover .overview {
+      transform: translateY(0);
+    }
+  }
