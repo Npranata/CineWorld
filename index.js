@@ -9,13 +9,9 @@ let totalPageCount = 0;
 let moviesPerPage = [];
 
 
-
-
-
-
-function removeMovieFromPage(movieId, page) {
+function removeMovieFromPage(movieIMG, page) {
   const movies = moviesPerPage[page];
-  const filteredMovies = movies.filter(movie => movie.id !== movieId);
+  const filteredMovies = movies.filter(movie => movie.poster_path !== null);
   moviesPerPage[page] = filteredMovies; // Update movies for the current page
   showMovies(filteredMovies); // Update the displayed movies on the page
 
@@ -23,6 +19,7 @@ function removeMovieFromPage(movieId, page) {
 
 /*
 * Fetches data from TMDB's API and return the parsed response data based on page number.
+* It also removes movie that do not have posters.
 */ 
 async function getMovies(url, page) {
   const resp = await fetch(url + page);
@@ -30,10 +27,11 @@ async function getMovies(url, page) {
   console.log(respData);
   totalPageCount = respData.total_pages; // Update the total number of pages
   moviesPerPage[page]= respData.results
-  showMovies(respData.results);
-  if(page==3){
-    removeMovieFromPage(1127227, 3)
-  } 
+  // showMovies(respData.results);
+  const movies = moviesPerPage[page];
+  const filteredMovies = movies.filter(movie => movie.poster_path !== null);
+  moviesPerPage[page] = filteredMovies; // Update movies for the current page
+  showMovies(filteredMovies); // Update the displayed movies on the page
   }
 
 
@@ -94,7 +92,8 @@ function showMovies(movies){
       const searchItem = search.value
   
       if(searchItem){
-        getMovies(SEARCHAPI + searchItem)
+        let catalog = SEARCHAPI + searchItem
+        getMovies(catalog, catalog)
       }
   })
     })

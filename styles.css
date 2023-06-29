@@ -50,6 +50,7 @@ header{
 main{
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .movie{
@@ -58,12 +59,51 @@ main{
     width:200px;
     margin: 1.1rem;
     max-height: 50%;
-    /* justify-content: flex-start; */
+    width: calc(25% - 2.2rem);
     overflow: hidden;
     position: relative;
+  
 
 }
+    /* Apply hover styles for touch devices */
+    @media (hover: hover) {
+        .movie:hover .overview {
+        transform: translateY(0);
+        }
+    }
 
+
+  /*
+  *Applies specific styling when the screen size is smaller or equal to 768 pixels
+  * to make sure that the movies fit the screen and sizes are consistent.
+  */
+  @media (max-width: 768px) {
+    .movieInfo h3 {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+    }
+    /*
+    *Sets the width of the movie elements to occupy 50% of the container's 
+    *width minus a margin of 2.2rem on both sides. 
+    *This ensures that two movie cards can fit side by side on the screen.
+    */
+    .movie {
+        width: calc(50% - 2.2rem); /
+      }
+  }
+  /*
+  *Sets the width of the movie elements to occupy 100% of the container's width
+   minus a margin of 2.2rem on both sides when the screen size is smaller or equal to 
+  *480 pixels.
+  */
+  @media (max-width: 480px) {
+    .movie {
+      width: calc(100% - 2.2rem);
+    }
+  }
+
+  
 .movie img{
     width: 100%;
 
@@ -76,20 +116,27 @@ main{
     justify-content: space-between;
     padding: 1rem;
     letter-spacing: 0.5px;
- 
     
+
 }
+    
+
 
 .movieInfo h3{
     margin:0;
     font-size: small;
-    padding: 0.5rem 1rem 1rem;
+    /* padding: 0.5rem 1rem 1rem; */
+    flex: 1;
+    
 }
 
 .movieInfo span{
     background-color:#22254b;
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
+    white-space: nowrap;
+  overflow: hidden;
+   
 }
 
 .movieInfo span.green{
@@ -116,16 +163,49 @@ main{
     transform: translateY(105%);
     transition: transform 0.3s ease-in;
     overflow: auto;
+
 }
 .overview h4{
-    /* margin-top: 5px;
-    margin-bottom: 11px;   */
+    margin-top: 5px;
+    margin-bottom: 11px;
 
 }
-
-/* Apply hover styles for touch devices */
-@media (hover: hover) {
-    .movie:hover .overview {
-      transform: translateY(0);
-    }
+.pageButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
+  
+  
+#prevPage {
+    margin-right: 1rem;
+    border-radius: 5px;
+    width: 120px;
+    padding: 0.5rem;
+    background-color: #373b69;
+    color: #eee;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #nextPage {
+    margin-left: 1rem;
+    border-radius: 5px;
+    width: 120px;
+    padding: 0.5rem;
+    background-color: #373b69;
+    color: #eee;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+/* Add hover styles for the page buttons */
+#prevPage:hover,
+#nextPage:hover {
+  background-color: #22254b;
+}
+
+
