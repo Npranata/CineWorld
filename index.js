@@ -4,7 +4,6 @@ const IMGPATH = "https://image.tmdb.org/t/p/w1280"
 const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=bdc5c5d47d4a215c6ac5150d5018e676&query="
 const form = document.getElementById("form")
 const search = document.getElementById("searchBar")
-const PAGE_COUNT = 5;
 let currentPage= 1;
 let totalPageCount = 0;
 let moviesPerPage = [];
@@ -23,7 +22,7 @@ function removeMovieFromPage(movieId, page) {
 }
 
 /*
-* Fetches data from TMDB's API and return the parsed response data
+* Fetches data from TMDB's API and return the parsed response data based on page number.
 */ 
 async function getMovies(url, page) {
   const resp = await fetch(url + page);
@@ -32,8 +31,9 @@ async function getMovies(url, page) {
   totalPageCount = respData.total_pages; // Update the total number of pages
   moviesPerPage[page]= respData.results
   showMovies(respData.results);
-  removeMovieFromPage(1127227, 3)
-    
+  if(page==3){
+    removeMovieFromPage(1127227, 3)
+  } 
   }
 
 
