@@ -4,6 +4,7 @@ const IMGPATH = "https://image.tmdb.org/t/p/w1280"
 const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=bdc5c5d47d4a215c6ac5150d5018e676&query="
 const form = document.getElementById("form")
 const search = document.getElementById("searchBar")
+const genre = "https://api.themoviedb.org/3/genre/movie/list?api_key=bdc5c5d47d4a215c6ac5150d5018e676&language=en-US"
 let currentPage= 1;
 let totalPageCount = 0;
 let moviesPerPage = [];
@@ -105,6 +106,9 @@ function showMovies(movies){
       currentPage--;
       getMovies(APIURL, currentPage);
     }
+    if (currentPage == 1) {
+      getMovies(APIURL, currentPage);
+    }
   }
   
   function handleNextPage() {
@@ -118,6 +122,26 @@ function showMovies(movies){
     document.getElementById("prevPage").addEventListener("click", handlePrevPage);
     document.getElementById("nextPage").addEventListener("click", handleNextPage);
   })
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbarIcon = document.querySelector('.navbar-icon');
+    const whiteBox = document.getElementById('whiteBox');
+
+    navbarIcon.addEventListener('click', () => {
+        whiteBox.style.display = 'block';
+    });
+
+    document.addEventListener('click', (event) => {
+        const isClickInside = whiteBox.contains(event.target);
+        const isClickNavbarIcon = navbarIcon.contains(event.target);
+        
+        if (!isClickInside && !isClickNavbarIcon) {
+            whiteBox.style.display = 'none';
+        }
+    });
+    
+});
+
 
 getMovies(APIURL, currentPage)
 movieSearch()
