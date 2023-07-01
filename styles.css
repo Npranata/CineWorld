@@ -67,7 +67,32 @@ header{
     bottom: -8px;
   }
   
+  #whiteBox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 200px;
+    background-color: rgba(255, 181, 34, 0.9);
+    z-index: 999;
+    display: none;
+    transition: ease-in;
+    overflow: auto;
+
+}
+#logo{
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.genreTypes{
   
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: medium;
+
+}
  
 #searchBar{
     padding: 0.5rem;
@@ -110,6 +135,9 @@ main{
   
 
 }
+.movie:hover .overview {
+  transform: translateY(0);
+  }
 
 
   /*
@@ -132,6 +160,7 @@ main{
     .movie {
         width: calc(50% - 2.2rem); 
       }
+      
   }
 
 
@@ -172,9 +201,9 @@ main{
         overflow: hidden;
         margin-top: 0.5rem;
       }
-      .movie:hover .overview {
+      /* .movie:hover .overview {
         transform: translateY(0);
-        }
+        } */
         #searchBar {
             width: 70%; /* Adjust the width as needed */
             margin: 0; /* Remove any margin */
@@ -279,26 +308,7 @@ main{
     transition: background-color 0.3s ease;
   }
 
-  #whiteBox {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 200px;
-    background-color: white;
-    z-index: 999;
-    display: none;
-}
 
-#logo{
-    margin-left: 1rem;
-    margin-top: 1rem;
-}
-#line{
-    width: 100px;
-    height: 100Pxpx;
-    background-color: black;
-}
 /* Add hover styles for the page buttons */
 #prevPage:hover,
 #nextPage:hover {
