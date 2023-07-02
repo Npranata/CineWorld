@@ -1,5 +1,5 @@
 const APIURL=  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=bdc5c5d47d4a215c6ac5150d5018e676&page="
-const APIURL2=  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=bdc5c5d47d4a215c6ac5150d5018e676"
+const genreUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=bdc5c5d47d4a215c6ac5150d5018e676&with_genres=`;
 const APIKEY ="api_key=bdc5c5d47d4a215c6ac5150d5018e676"
 const IMGPATH = "https://image.tmdb.org/t/p/w1280"
 const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=bdc5c5d47d4a215c6ac5150d5018e676&query="
@@ -47,7 +47,7 @@ function showMovies(movies){
 
   //object destructuring 
   movies.forEach((movie)=> {
-    const { poster_path, title, vote_average, overview} = movie;
+    const { poster_path, title, vote_average, overview, genre_ids, name} = movie;
     const ROUNDVOTE = parseFloat(vote_average).toFixed(1);
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie')
@@ -108,9 +108,11 @@ function showMovies(movies){
     if (currentPage > 1) {
       currentPage--;
       getMovies(APIURL, currentPage);
+      fetchGenres(GENRE) 
     }
     if (currentPage == 1) {
       getMovies(APIURL, currentPage);
+      fetchGenres(GENRE)
     }
   }
   
@@ -144,25 +146,29 @@ function showMovies(movies){
     });
     
 });
-function handleGenreSelection(genreId) {
-  selectedGenre = genreId;
-  currentPage = 1;
-  getMovies(GENRE, currentPage);
-}
+
 
 // Fetch genre list and populate genre dropdown
 async function fetchGenres(genre) {
-  const resp = await fetch(genre);
-  const respData = await resp.json();
-  const genres = respData.genres;
-  console.log(genres)
-  showMovieGenre(genres)
-  const allGenres =  document.getElementById("genreNames");
-  document.addEventListener('click', (event) => {
-  genreNames.addEventListener('click', () => {
-    handleGenreSelection(GENRE);
-  });
-})
+  try {
+    const resp = await fetch(genre);
+    const respData = await resp.json();
+    const genres = respData.genres;
+    showMovieGenre(genres);
+    const genreElements = document.getElementsByClassName("genreTypes");
+    Array.from(genreElements).forEach((element) => {
+      element.addEventListener("click", () => {
+        const genreId = element.getAttribute("data-genre-id");
+        const movies = moviesPerPage[currentPage];
+        const filteredMovies = movies.filter(
+          (movie) => movie.genre_ids.includes(parseInt(genreId))
+        );
+        showMovies(filteredMovies);
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function showMovieGenre(genres){
@@ -170,8 +176,9 @@ function showMovieGenre(genres){
 
   genres.forEach((genre)=> {
     const{id, name}= genre;
-    genreEl = document.createElement('genreTypes');
+    genreEl = document.createElement('div');
     genreEl.classList.add('genreTypes');
+    genreEl.setAttribute('data-genre-id', id);
     genreEl.innerHTML= `
     <div> ${name}</div>
     
@@ -187,3 +194,8 @@ function showMovieGenre(genres){
 getMovies(APIURL, currentPage)
 movieSearch()
 fetchGenres(GENRE) 
+
+// selectedGenre = genreId;
+//   currentPage = 1;
+//   let theGenre = `${genreUrl}${genreId}`;
+//   getMovies(theGenre, currentPage);
