@@ -108,20 +108,22 @@ function showMovies(movies){
     if (currentPage > 1) {
       currentPage--;
       getMovies(APIURL, currentPage);
-      fetchGenres(GENRE) 
     }
     if (currentPage == 1) {
       getMovies(APIURL, currentPage);
-      fetchGenres(GENRE)
     }
   }
   
   function handleNextPage() {
     if (currentPage < totalPageCount) {
       currentPage++;
-      getMovies(APIURL, currentPage);
+      getMovies(APIURL, currentPage)
+      }
+      
+      
     }
-  }
+
+  
 
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("prevPage").addEventListener("click", handlePrevPage);
@@ -159,8 +161,9 @@ async function fetchGenres(genre) {
     Array.from(genreElements).forEach((element) => {
       element.addEventListener("click", () => {
         const genreId = element.getAttribute("data-genre-id");
+        selectedGenre = genreId
         const movies = moviesPerPage[currentPage];
-        const filteredMovies = movies.filter(
+        const filteredMovies =  movies.filter(
           (movie) => movie.genre_ids.includes(parseInt(genreId))
         );
         showMovies(filteredMovies);

@@ -20,7 +20,6 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    background-color:#373b69 ;
     
     
 }
@@ -84,6 +83,15 @@ header{
     margin-left: 1rem;
     margin-top: 1rem;
     margin-bottom: 2rem;
+}
+
+#genres{
+ font-size: small;
+ margin-left: 10px;
+ color: rgba(19, 15, 15, 0.9);
+}
+#line{
+  border-color: rgba(255, 255, 255, 0.9);
 }
 .genreTypes{
   
@@ -201,13 +209,12 @@ main{
         overflow: hidden;
         margin-top: 0.5rem;
       }
-      /* .movie:hover .overview {
-        transform: translateY(0);
-        } */
         #searchBar {
             width: 70%; /* Adjust the width as needed */
             margin: 0; /* Remove any margin */
         }
+        
+
    
   }
 
@@ -310,9 +317,9 @@ main{
 
 
 /* Add hover styles for the page buttons */
-#prevPage:hover,
+/* #prevPage:hover,
 #nextPage:hover {
   background-color: #22254b;
-}
+} */
 
 
