@@ -82,7 +82,7 @@ function showMovies(movies){
       return 'red'
     }
   }
-  /*
+  /** 
   *Sets up a search functionality for movies, allowing users to enter a search query in an input field. 
   *When the form is submitted, it retrieves the search query value, sends a request to the movie search API, 
   *and displays the corresponding movie results on the webpage.
@@ -103,7 +103,9 @@ function showMovies(movies){
     })
   }
 
-
+   /**
+   * Decerements currentpage and fetch movies from that particular page.
+   */
   function handlePrevPage() {
     if (currentPage > 1) {
       currentPage--;
@@ -113,7 +115,9 @@ function showMovies(movies){
       getMovies(APIURL, currentPage);
     }
   }
-  
+  /**
+   * Increments currentpage and fetch movies from that particular page.
+   */
   function handleNextPage() {
     if (currentPage < totalPageCount) {
       currentPage++;
@@ -123,34 +127,47 @@ function showMovies(movies){
       
     }
 
+  /**
+   * Assign the event functions for the next page and previous page buttons.
+   */
+  function pageButtonEvent(){
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById("prevPage").addEventListener("click", handlePrevPage);
+      document.getElementById("nextPage").addEventListener("click", handleNextPage);
+    })
+  }
+  
+  /**
+   * Handles the navigation icon event by making sure that a navigation bar slides in
+   * when the user clicks the navigation icon.
+   */
+  function navBarEvent(){
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbarIcon = document.querySelector('.navbar');
+      const yellowBox = document.getElementById('yellowBox');
+  
+      navbarIcon.addEventListener('click', () => {
+          yellowBox.style.display = 'block';
+      });
+  
+      document.addEventListener('click', (event) => {
+          const isClickInside = yellowBox.contains(event.target);
+          const isClickNavbarIcon = navbarIcon.contains(event.target);
+          
+          if (!isClickInside && !isClickNavbarIcon) {
+              yellowBox.style.display = 'none';
+          }
+      });
+      
+  });
+  }
   
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("prevPage").addEventListener("click", handlePrevPage);
-    document.getElementById("nextPage").addEventListener("click", handleNextPage);
-  })
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const navbarIcon = document.querySelector('.navbar');
-    const whiteBox = document.getElementById('whiteBox');
-
-    navbarIcon.addEventListener('click', () => {
-        whiteBox.style.display = 'block';
-    });
-
-    document.addEventListener('click', (event) => {
-        const isClickInside = whiteBox.contains(event.target);
-        const isClickNavbarIcon = navbarIcon.contains(event.target);
-        
-        if (!isClickInside && !isClickNavbarIcon) {
-            whiteBox.style.display = 'none';
-        }
-    });
-    
-});
-
-
-// Fetch genre list and populate genre dropdown
+/** 
+* Fetch genre list, populate genre dropdown, and make sure that the movies are
+* on the page are shown based on the type of genre the user clicks.
+*/
 async function fetchGenres(genre) {
   try {
     const resp = await fetch(genre);
@@ -175,7 +192,7 @@ async function fetchGenres(genre) {
 }
 
 function showMovieGenre(genres){
-  const boxElement = document.getElementById("whiteBox");
+  const boxElement = document.getElementById("yellowBox");
 
   genres.forEach((genre)=> {
     const{id, name}= genre;
@@ -191,14 +208,9 @@ function showMovieGenre(genres){
 }
 
 
- 
-
-
 getMovies(APIURL, currentPage)
 movieSearch()
 fetchGenres(GENRE) 
+pageButtonEvent()
+navBarEvent()
 
-// selectedGenre = genreId;
-//   currentPage = 1;
-//   let theGenre = `${genreUrl}${genreId}`;
-//   getMovies(theGenre, currentPage);
