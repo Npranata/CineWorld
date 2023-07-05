@@ -206,6 +206,16 @@ function showMovieGenre(genres){
     boxElement.appendChild(genreEl)
   })
 }
+function handleSignUpLogin(){
+  document.addEventListener('DOMContentLoaded', () => {
+    const login = document.querySelector('#logIn');
+    const signUp = document.getElementById('#signUp');
+
+    signUp.addEventListener('click', () => {
+        yellowBox.style.display = 'block';
+    });
+  })
+}
 
 
 getMovies(APIURL, currentPage)

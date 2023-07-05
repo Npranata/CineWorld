@@ -13,7 +13,19 @@ form{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
 }
+
+#logIn,
+#signUp {
+    color: #eee;
+    cursor: pointer; /* Adjust the margin to control the space between login/sign up and search bar */
+    margin-left: 1rem;
+    font-size: small;
+    flex-direction: row;
+
+}
+
 header{
     background-color:#373b69 ;
     display: flex;
@@ -23,13 +35,15 @@ header{
     
     
 }
+  
+
 
 
 .navbar {
     display: flex;
-    flex-direction: column;
     align-items: center;
     cursor: pointer;
+    
   }
   
   .navbar-icon {
@@ -213,6 +227,10 @@ main{
             width: 70%; /* Adjust the width as needed */
             margin: 0; /* Remove any margin */
         }
+        #searchBar{
+          width: 50%;
+         
+      }
         
 
    
