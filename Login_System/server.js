@@ -10,7 +10,6 @@ const router = require('./router')
 
 const path = require('path'); //path module 
 
-const port = process.env.PORT||3000; //Port variable
 
 //body parser module: Rsponsible for passing incoming request bodies in the middleware before you use it
 app.use(bodyParser.json())
