@@ -27,7 +27,7 @@ span{
     margin-bottom: 1rem;
 }
 #signUpLink{
-    color: blue;
+    color: rgb(243, 127, 18);
 }
 @media (max-width: 768px) {
     .center-div{
