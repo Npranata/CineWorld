@@ -39,5 +39,3 @@ app.get('/', (req, res) =>{
 app.get('/', (req, res) =>{
     res.render('signUp', { title : "Sign Up"});//render html page
 })
-
-app.listen(port, ()=>{console.log("Listening to server on http://localhost:3000")})
