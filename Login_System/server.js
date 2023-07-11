@@ -36,6 +36,6 @@ app.use("/route", router);
 app.get('/', (req, res) =>{
     res.render('logPage', { title : "Login System"});//render html page
 })
-app.get('/', (req, res) =>{
+app.get('/signUp', (req, res) =>{
     res.render('signUp', { title : "Sign Up"});//render html page
 })
