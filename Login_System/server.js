@@ -8,6 +8,7 @@ const{v4:uuidv4} = require("uuid");
 
 const router = require('./router')
 
+
 const path = require('path'); //path module 
 
 
@@ -36,6 +37,7 @@ app.use("/route", router);
 app.get('/', (req, res) =>{
     res.render('logPage', { title : "Login System"});//render html page
 })
-app.get('/signUp', (req, res) =>{
+app.get('/sign', (req, res) =>{
     res.render('signUp', { title : "Sign Up"});//render html page
 })
+
