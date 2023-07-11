@@ -7,7 +7,7 @@ const session = require("express-session");
 const{v4:uuidv4} = require("uuid");
 
 const router = require('./router')
-
+const port = process.env.PORT||3000;
 
 const path = require('path'); //path module 
 
@@ -41,3 +41,4 @@ app.get('/sign', (req, res) =>{
     res.render('signUp', { title : "Sign Up"});//render html page
 })
 
+app.listen(port, () => console.log("Listening to the server http://localhost:3000"));
