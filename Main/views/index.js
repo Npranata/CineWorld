@@ -207,9 +207,6 @@ function showMovieGenre(genres){
 }
 
 
-
-
-
 getMovies(APIURL, currentPage)
 movieSearch()
 fetchGenres(GENRE) 
